@@ -776,3 +776,942 @@ a:hover {
   font-size: 12px;
   color: var(--color-text-light);
 }
+
+/* ── Tab 4: KOL Research ────────────────────────────────────────────────────── */
+
+.kol-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-text-light);
+  margin-bottom: 14px;
+}
+
+/* B: Profile Cards Grid */
+
+.kol-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 1100px) {
+  .kol-cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 680px) {
+  .kol-cards-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.kol-profile-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kol-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.kol-role {
+  font-size: 11px;
+  color: var(--color-text-light);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.kol-focus-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.kol-focus-pill {
+  display: inline-block;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-light);
+  letter-spacing: 0.02em;
+}
+
+.kol-linkedin-link {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-blue);
+  text-decoration: none;
+  border-top: 1px solid var(--color-border);
+}
+.kol-linkedin-link:hover { text-decoration: underline; }
+
+/* C: Accordion per KOL */
+
+.kol-accordion {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-white);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.kol-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--color-surface);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.kol-accordion-header:hover { background: #eef0f7; }
+
+.kol-acc-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dark);
+  flex: 1;
+}
+
+.kol-acc-meta {
+  font-size: 12px;
+  color: var(--color-text-light);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+.kol-acc-chevron {
+  font-size: 16px;
+  color: var(--color-text-light);
+  transition: transform 0.2s;
+  line-height: 1;
+}
+
+.kol-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.kol-accordion-body.open { overflow: visible; }
+
+.kol-accordion-inner {
+  padding: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.kol-subsection-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-text-light);
+  margin-bottom: 12px;
+}
+
+.kol-subsection-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 20px 0;
+}
+
+/* Post cards */
+
+.kol-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kol-post-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+}
+
+.kol-post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.kol-post-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.kol-post-date {
+  font-size: 11px;
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+.kol-post-snippet {
+  font-size: 13px;
+  color: var(--color-text-light);
+  font-style: italic;
+  line-height: 1.55;
+  border-left: 3px solid var(--color-violet);
+  padding-left: 12px;
+  margin: 0 0 10px;
+}
+
+.kol-post-source-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-blue);
+  text-decoration: none;
+}
+.kol-post-source-link:hover { text-decoration: underline; }
+
+/* Analysis block */
+
+.kol-analysis-block {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.kol-style-tag-row {
+  margin-bottom: 14px;
+}
+
+.kol-style-tag {
+  display: inline-block;
+  background: var(--color-violet);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-radius: 3px;
+  padding: 3px 10px;
+}
+
+.kol-analysis-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kol-analysis-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.kol-analysis-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 1px;
+}
+
+.kol-analysis-value {
+  font-size: 13px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* D: Writing Checklist */
+
+.kol-checklist-section {
+  margin-top: 32px;
+}
+
+.kol-checklist-intro {
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.kol-checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .kol-checklist-grid { grid-template-columns: 1fr; }
+}
+
+.kol-checklist-block {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+}
+
+.kol-checklist-category {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+}
+
+.kol-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.kol-checklist li {
+  font-size: 13px;
+  color: var(--color-text);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.kol-checklist li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-olive);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* ── Tab 5: LinkedIn Content Generation ─────────────────────────────────────── */
+
+/* B: Info Banner */
+
+.li-info-banner {
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-blue);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  padding: 12px 20px;
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.li-info-banner strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* C: Post Cards */
+
+.li-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.li-post-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* Top colour bar + category badge */
+
+.li-card-topbar {
+  height: 6px;
+  width: 100%;
+}
+
+.li-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 0;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.li-category-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-radius: 3px;
+  padding: 3px 10px;
+  color: #fff;
+}
+
+.li-card-meta {
+  font-size: 12px;
+  color: var(--color-text-light);
+  padding: 8px 20px 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Post content box */
+
+.li-card-body {
+  padding: 20px;
+}
+
+.li-content-box {
+  background: var(--color-surface);
+  border-radius: 6px;
+  padding: 20px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  margin-bottom: 16px;
+}
+
+.li-content-box .li-hashtag {
+  color: var(--color-blue);
+  font-weight: 500;
+}
+
+/* Image brief box */
+
+.li-image-brief-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-text-light);
+  margin-bottom: 6px;
+}
+
+.li-image-brief-box {
+  background: var(--color-white);
+  border: 1px dashed var(--color-border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Source articles collapsible */
+
+.li-sources-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-light);
+  padding: 0;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.li-sources-toggle:hover { color: var(--color-text); }
+
+.li-sources-chevron {
+  font-size: 11px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.li-sources-chevron.open { transform: rotate(180deg); }
+
+.li-sources-list {
+  display: none;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.li-sources-list.open { display: flex; }
+
+.li-source-pill {
+  display: inline-block;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+/* Card footer with copy button */
+
+.li-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 16px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+  margin-top: 4px;
+}
+
+.li-copy-btn {
+  background: var(--color-dark);
+  color: var(--color-white);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.li-copy-btn:hover   { opacity: 0.85; }
+.li-copy-btn.copied  { background: var(--color-olive); }
+
+/* ── Tab 6: Progress Report ──────────────────────────────────────────────────── */
+
+/* Shared accordion shell */
+
+.pr-accordion {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-white);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.pr-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--color-surface);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background 0.15s;
+  gap: 12px;
+}
+.pr-accordion-header:hover { background: #eef0f7; }
+
+.pr-acc-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.pr-chevron {
+  font-size: 14px;
+  color: var(--color-text-light);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.pr-chevron.closed { transform: rotate(-180deg); }
+
+.pr-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.pr-accordion-body.open {
+  max-height: 4000px;
+}
+
+.pr-accordion-inner {
+  padding: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* B: Pipeline diagram */
+
+.pr-pipeline-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 20px;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+}
+
+.pr-pipe-box {
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: 16px 20px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 160px;
+}
+
+.pr-pipe-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: 4px;
+}
+
+.pr-pipe-sub {
+  font-size: 10px;
+  opacity: 0.7;
+  line-height: 1.4;
+}
+
+.pr-pipe-arrow {
+  color: var(--color-warm);
+  font-size: 24px;
+  line-height: 1;
+  align-self: center;
+  font-weight: 300;
+  padding: 0 4px;
+}
+
+.pr-body-text {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.pr-body-text:last-child { margin-bottom: 0; }
+
+/* C: Challenge cards */
+
+.pr-challenge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pr-challenge-card {
+  display: flex;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  align-items: flex-start;
+}
+
+.pr-challenge-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-dark);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+.pr-challenge-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.pr-challenge-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+}
+
+.pr-challenge-row {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--color-text);
+  line-height: 1.55;
+  margin-bottom: 6px;
+  align-items: flex-start;
+}
+.pr-challenge-row:last-child { margin-bottom: 0; }
+
+.pr-cl-label {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-radius: 3px;
+  padding: 2px 7px;
+  margin-top: 2px;
+  line-height: 1.5;
+}
+.pr-cl-problem    { background: #F9E6E6; color: #9E2A2A; }
+.pr-cl-resolution { background: #E6F4ED; color: #1E6B41; }
+
+/* D: Prompt table */
+
+.pr-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pr-prompt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.pr-prompt-table th {
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.pr-prompt-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.pr-prompt-table tr:last-child td { border-bottom: none; }
+.pr-prompt-table tr:nth-child(even) td { background: var(--color-surface); }
+
+.pr-version-badge {
+  display: inline-block;
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.pr-impact-pos { color: #1E6B41; }
+.pr-impact-neg { color: #9E2A2A; }
+
+/* E: Lessons grid */
+
+.pr-lessons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 700px) {
+  .pr-lessons-grid { grid-template-columns: 1fr; }
+}
+
+.pr-lesson-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 18px;
+}
+
+.pr-lesson-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.pr-lesson-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+
+.pr-lesson-text {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* F: Future list */
+
+.pr-future-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pr-future-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+}
+
+.pr-future-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────────── */
+
+.app-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-light);
+  padding: 40px 0 20px;
+  border-top: 1px solid var(--color-border);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ── Global Polish ───────────────────────────────────────────────────────────── */
+
+/* Slightly longer tab fade (was 0.18s) */
+.tab-content {
+  animation-duration: 0.28s;
+}
+
+/* Card hover lift — applies to all major card types */
+.stat-card,
+.article-card,
+.classified-card,
+.kol-post-card,
+.kol-profile-card,
+.li-post-card,
+.pr-challenge-card,
+.pr-lesson-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover,
+.article-card:hover,
+.classified-card:hover,
+.kol-post-card:hover,
+.kol-profile-card:hover,
+.li-post-card:hover,
+.pr-challenge-card:hover,
+.pr-lesson-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+
+/* Nav: scroll horizontally on small screens */
+@media (max-width: 860px) {
+  .nav {
+    padding: 0 16px;
+  }
+  .nav-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 2px;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tabs button {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .nav-brand {
+    display: none;
+  }
+}
+
+/* Content area padding on small screens */
+@media (max-width: 768px) {
+  .content-area {
+    padding: 72px 20px 40px;
+  }
+}
+
+/* Stat cards: 2-column below 900px, 1-column below 480px */
+@media (max-width: 900px) {
+  .stat-cards-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .stat-cards-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Article cards: full width below 700px */
+@media (max-width: 700px) {
+  .article-card,
+  .classified-card {
+    padding: 14px 16px;
+  }
+  .article-card-top,
+  .classified-card-bottom {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* Tab 3 bar chart label truncation on small screens */
+@media (max-width: 600px) {
+  .bar-label {
+    font-size: 10px;
+    min-width: 80px;
+  }
+}
+
+/* Domain def panel responsive */
+@media (max-width: 700px) {
+  .domain-def-grid {
+    grid-template-columns: 1fr;
+  }
+  .ddg-label {
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+  .ddg-value { padding-bottom: 0; }
+}
+
+/* Tab 6 pipeline diagram: stack on mobile */
+@media (max-width: 720px) {
+  .pr-pipeline-diagram {
+    flex-direction: column;
+  }
+  .pr-pipe-arrow {
+    transform: rotate(90deg);
+    font-size: 20px;
+  }
+}
