@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI News Pipeline</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <span class="nav-brand">AI News Pipeline</span>
+    <ul class="nav-tabs">
+      <li><button data-tab="1">01&nbsp;&nbsp;Pipeline &amp; Sources</button></li>
+      <li><button data-tab="2">02&nbsp;&nbsp;Relevance Scoring</button></li>
+      <li><button data-tab="3">03&nbsp;&nbsp;Classification</button></li>
+      <li><button data-tab="4">04&nbsp;&nbsp;KOL Research</button></li>
+      <li><button data-tab="5">05&nbsp;&nbsp;LinkedIn Content</button></li>
+      <li><button data-tab="6">06&nbsp;&nbsp;Progress Report</button></li>
+    </ul>
+  </nav>
+
+  <!-- ── Content area ────────────────────────────────────────────────────── -->
+  <main class="content-area">
+
+    <!-- ═══════════════════════════════════════════════════════ TAB 1 ══ -->
+    <div class="tab-content" id="tab-1">
+
+      <!-- A: Page Header -->
+      <div class="tab-page-header">
+        <h1 class="tab-main-title">AI News Monitoring Pipeline</h1>
+        <p class="tab-main-subtitle">Automated ingestion, relevance scoring, and classification of AI industry news — updated on a 7-day rolling window.</p>
+      </div>
+
+      <!-- B: Stat Cards -->
+      <div class="stat-cards-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-label">Articles Ingested</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-relevant">—</div>
+          <div class="stat-label">Relevant Articles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Sources Monitored</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">7 Days</div>
+          <div class="stat-label">Monitoring Window</div>
+        </div>
+      </div>
+
+      <!-- C: About -->
+      <div class="about-section card">
+        <p class="section-title">What This Pipeline Does</p>
+        <p>This pipeline automatically monitors 12 trusted AI news sources — including venture capital blogs, AI company announcements, and leading technology publications — collecting all articles published within the last 7 days. New articles are fetched, deduplicated, and stored in a local database each time the pipeline runs.</p>
+        <p>Each article is evaluated by a large language model via OpenRouter, which assigns a relevance score from 1 to 10 based on how closely the article relates to AI tools, SaaS products, and practical AI adoption. Articles scoring 7 or above are retained and classified into one of five business categories — surfacing what matters for professionals and decision-makers without manual curation.</p>
+      </div>
+
+      <!-- D: Sources Table -->
+      <div class="sources-section">
+        <p class="section-title">Monitored Sources</p>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <table class="sources-table">
+            <thead>
+              <tr>
+                <th>Source Name</th>
+                <th>Category</th>
+                <th>Coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Andreessen Horowitz (a16z)</td>  <td><span class="source-cat-badge">VC &amp; Tech Blogs</span></td>    <td>Blog &amp; Reports</td></tr>
+              <tr><td>Y Combinator (Hacker News)</td>  <td><span class="source-cat-badge">VC &amp; Tech Blogs</span></td>    <td>News Feed</td></tr>
+              <tr><td>Sequoia Capital</td>              <td><span class="source-cat-badge">VC &amp; Tech Blogs</span></td>    <td>Blog &amp; Reports</td></tr>
+              <tr><td>OpenAI</td>                       <td><span class="source-cat-badge">AI Company Blogs</span></td>       <td>Blog &amp; Announcements</td></tr>
+              <tr><td>Google DeepMind</td>              <td><span class="source-cat-badge">AI Company Blogs</span></td>       <td>Blog &amp; Research</td></tr>
+              <tr><td>Microsoft AI Blog</td>            <td><span class="source-cat-badge">AI Company Blogs</span></td>       <td>Blog &amp; Updates</td></tr>
+              <tr><td>Anthropic</td>                    <td><span class="source-cat-badge">AI Company Blogs</span></td>       <td>Blog &amp; Research</td></tr>
+              <tr><td>MIT Technology Review</td>        <td><span class="source-cat-badge">Tech &amp; AI News</span></td>     <td>News &amp; Analysis</td></tr>
+              <tr><td>The Verge (AI)</td>               <td><span class="source-cat-badge">Tech &amp; AI News</span></td>     <td>News Feed</td></tr>
+              <tr><td>TechCrunch (AI)</td>              <td><span class="source-cat-badge">Tech &amp; AI News</span></td>     <td>News Feed</td></tr>
+              <tr><td>Wired (AI)</td>                   <td><span class="source-cat-badge">Tech &amp; AI News</span></td>     <td>News Feed</td></tr>
+              <tr><td>AI Business</td>                  <td><span class="source-cat-badge">Tech &amp; AI News</span></td>     <td>News Feed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- E: Domain Focus -->
+      <div class="domain-focus-section">
+        <p class="section-title">Domain &amp; Relevance Focus</p>
+        <div class="focus-columns">
+          <div class="focus-col card">
+            <p class="focus-col-title focus-in">In Scope</p>
+            <ul class="focus-list">
+              <li class="focus-in">AI-powered SaaS products and platforms</li>
+              <li class="focus-in">New consumer and public AI tools</li>
+              <li class="focus-in">Foundation model updates (GPT, Claude, Gemini, Llama)</li>
+              <li class="focus-in">AI agent frameworks and automation tools</li>
+              <li class="focus-in">Pricing, accessibility and AI tool adoption trends</li>
+            </ul>
+          </div>
+          <div class="focus-col card">
+            <p class="focus-col-title focus-out">Out of Scope</p>
+            <ul class="focus-list">
+              <li class="focus-out">Pure academic research with no business application</li>
+              <li class="focus-out">Hardware and chip manufacturing</li>
+              <li class="focus-out">Geopolitical AI policy</li>
+              <li class="focus-out">General tech news unrelated to AI</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-1 -->
+
+    <!-- ═══════════════════════════════════════════════════════ TAB 2 ══ -->
+    <div class="tab-content" id="tab-2">
+
+      <!-- A: Page Header -->
+      <div class="tab-page-header">
+        <h1 class="tab-main-title">Relevance Scoring</h1>
+        <p class="tab-main-subtitle">Each article is scored 1–10 by an LLM for relevance to the AI Tools &amp; SaaS domain. Articles scoring 7 or above are retained.</p>
+      </div>
+
+      <!-- B: Domain Definition Panel -->
+      <div class="domain-def-panel">
+        <div class="domain-def-grid">
+          <span class="ddg-label">Industry &amp; Domain</span>
+          <span class="ddg-value">AI Tools and Applications / Tech-SaaS</span>
+
+          <span class="ddg-label">Target Audience</span>
+          <span class="ddg-value">Tech-savvy professionals, SaaS founders, business leaders focused on practical AI adoption</span>
+
+          <span class="ddg-label">Relevance Threshold</span>
+          <span class="ddg-value">Score &ge; 7 / 10</span>
+
+          <span class="ddg-label">Scoring Model</span>
+          <span class="ddg-value">meta-llama/llama-3.3-70b-instruct via OpenRouter</span>
+
+          <span class="ddg-label">Fallback Model</span>
+          <span class="ddg-value">mistralai/mistral-nemo</span>
+        </div>
+      </div>
+
+      <!-- C: Score Distribution Bar -->
+      <div class="score-dist-section card">
+        <p class="section-title" style="margin-bottom:16px;">Score Distribution</p>
+        <div class="score-bar-track">
+          <div class="score-bar-fill score-bar-relevant" id="bar-relevant-fill" style="width:50%">
+            <span class="score-bar-label" id="bar-relevant-label">Loading…</span>
+          </div>
+          <div class="score-bar-fill score-bar-not" id="bar-not-fill" style="width:50%">
+            <span class="score-bar-label" id="bar-not-label">Loading…</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D: Criteria Legend -->
+      <div class="criteria-legend-section">
+        <p class="section-title">Relevance Criteria Used</p>
+        <div class="criteria-pills-row">
+          <span class="criteria-pill-badge">&#127919; Strategic Impact</span>
+          <span class="criteria-pill-badge">&#128176; Revenue or Cost Implications</span>
+          <span class="criteria-pill-badge">&#9889; Competitive Advantage</span>
+          <span class="criteria-pill-badge">&#9881;&#65039; Operational Efficiency</span>
+          <span class="criteria-pill-badge">&#128203; Regulatory &amp; Governance</span>
+        </div>
+      </div>
+
+      <!-- E: Article List -->
+      <div class="article-list-section">
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All (—)</button>
+          <button class="filter-btn" data-filter="relevant">Relevant Only (—)</button>
+        </div>
+        <div id="article-list">
+          <p class="placeholder-msg">Loading articles…</p>
+        </div>
+      </div>
+
+    </div><!-- /tab-2 -->
+
+    <!-- ═══════════════════════════════════════════════════════ TAB 3 ══ -->
+    <div class="tab-content" id="tab-3">
+
+      <!-- A: Page Header -->
+      <div class="tab-page-header">
+        <h1 class="tab-main-title">Information Classification</h1>
+        <p class="tab-main-subtitle">61 relevant articles automatically classified into 5 business-relevant categories by meta-llama/llama-4-maverick via OpenRouter.</p>
+      </div>
+
+      <!-- B: Category Summary Cards — populated by tab3.js -->
+      <div class="cat-cards-row" id="cat-cards-row">
+        <p class="placeholder-msg">Loading categories…</p>
+      </div>
+
+      <!-- C: Bar Chart — populated by tab3.js -->
+      <div class="cat-bar-chart card">
+        <p class="section-title" style="margin-bottom:20px;">Category Distribution</p>
+        <div id="cat-bar-chart-inner">
+          <p class="placeholder-msg" style="padding:12px 0;">Loading chart…</p>
+        </div>
+      </div>
+
+      <!-- D: Filter Pills — populated by tab3.js -->
+      <div class="cat-filter-row" id="cat-filter-row"></div>
+
+      <!-- E: Classified Article List — populated by tab3.js -->
+      <div id="classified-list">
+        <p class="placeholder-msg">Loading classified articles…</p>
+      </div>
+
+    </div><!-- /tab-3 -->
+
+    <div class="tab-content" id="tab-4">
+      <p class="placeholder-msg">Tab 4 content loading…</p>
+    </div>
+
+    <div class="tab-content" id="tab-5">
+      <p class="placeholder-msg">Tab 5 content loading…</p>
+    </div>
+
+    <div class="tab-content" id="tab-6">
+      <p class="placeholder-msg">Tab 6 content loading…</p>
+    </div>
+
+  </main>
+
+  <script src="/static/js/main.js"></script>
+  <script src="/static/js/tab1.js"></script>
+  <script src="/static/js/tab2.js"></script>
+  <script src="/static/js/tab3.js"></script>
+</body>
+</html>
