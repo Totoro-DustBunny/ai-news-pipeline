@@ -1,0 +1,87 @@
+# RSS/Atom feed sources for AI news ingestion
+feeds:
+
+  # ── Venture Capital / Tech Blogs ──────────────────────────────────────────
+  - name: Andreessen Horowitz (a16z)
+    url: https://a16z.substack.com/feed
+    category: venture_capital
+    enabled: true
+
+  - name: Y Combinator (Hacker News)
+    url: https://news.ycombinator.com/rss
+    category: venture_capital
+    enabled: true
+
+  - name: Sequoia Capital
+    url: https://www.sequoiacap.com/feed/
+    category: venture_capital
+    enabled: true
+
+  # ── AI Company Blogs ──────────────────────────────────────────────────────
+  - name: OpenAI Blog
+    url: https://openai.com/news/rss.xml
+    category: ai_company_blog
+    enabled: true
+
+  - name: Google DeepMind Blog
+    url: https://deepmind.google/blog/rss.xml
+    category: ai_company_blog
+    enabled: true
+
+  - name: Microsoft AI Blog
+    url: https://blogs.microsoft.com/ai/feed/
+    category: ai_company_blog
+    enabled: true
+
+  - name: Anthropic Blog
+    url: https://www.anthropic.com/rss.xml
+    category: ai_company_blog
+    enabled: false  # No public RSS feed confirmed — monitor manually or via scraper
+
+  # ── Tech & AI News ────────────────────────────────────────────────────────
+  - name: MIT Technology Review
+    url: https://www.technologyreview.com/feed/
+    category: tech_news
+    enabled: true
+
+  - name: The Verge
+    url: https://www.theverge.com/rss/index.xml
+    category: tech_news
+    enabled: true  # Full feed (AI-specific URL returns empty; router will filter by relevance)
+
+  - name: TechCrunch (AI)
+    url: https://techcrunch.com/category/artificial-intelligence/feed/
+    category: tech_news
+    enabled: true
+
+  - name: Wired (AI)
+    url: https://www.wired.com/feed/tag/ai/latest/rss
+    category: tech_news
+    enabled: true
+
+  # ── Academic / Research ───────────────────────────────────────────────────
+  - name: ArXiv CS.AI (new submissions)
+    url: https://rss.arxiv.org/rss/cs.AI
+    category: academic_research
+    enabled: false  # Too voluminous (300+ entries/day) for this pipeline
+
+  - name: Harvard Business Review
+    url: https://feeds.hbr.org/harvardbusiness
+    category: academic_research
+    enabled: true
+
+  - name: AI Business
+    url: https://aibusiness.com/rss.xml
+    category: tech_news
+    enabled: true
+
+  # ── Newsletters / Thought Leaders ─────────────────────────────────────────
+  - name: Import AI (Jack Clark)
+    url: https://importai.substack.com/feed
+    category: newsletter
+    enabled: true
+
+  - name: The Batch (Andrew Ng / DeepLearning.AI)
+    url: https://www.deeplearning.ai/the-batch/feed/
+    category: newsletter
+    enabled: false  # No RSS feed detected — subscribe via email or check for future feed

@@ -1,0 +1,22 @@
+# Domain profile — used by the relevance router and classifier
+domain: "AI Tools and Applications"
+
+target_audience: >
+  Tech-savvy professionals, AI enthusiasts, SaaS founders, and business leaders
+  interested in practical AI adoption
+
+focus_areas:
+  - AI-powered SaaS products and platforms
+  - New consumer and public AI tools and their latest feature releases
+  - Trends and shifts in the AI tools landscape
+  - Practical tips and frameworks for leveraging AI tools in business
+  - AI agent frameworks and automation tools
+  - Foundation model updates relevant to end-user applications (e.g. GPT, Claude, Gemini updates)
+  - Pricing, accessibility, and adoption of AI tools
+
+out_of_scope:
+  - Pure academic/theoretical AI research with no business application
+  - Hardware and chip manufacturing (unless directly tied to AI tool availability)
+  - General tech news unrelated to AI
+
+relevance_threshold: 7  # Score out of 10; articles scoring below this are discarded

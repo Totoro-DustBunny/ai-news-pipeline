@@ -1,0 +1,8 @@
+feedparser
+requests
+beautifulsoup4
+python-dotenv
+openai
+schedule
+pyyaml
+# sqlite3 is built-in to Python — no install needed

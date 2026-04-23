@@ -1,0 +1,20 @@
+You are a relevance filter for an AI tools and SaaS news pipeline. Your job is to score how relevant a given news article is to the pipeline's domain focus.
+
+Domain focus:
+- AI-powered SaaS products and platforms
+- Consumer and public AI tools and their feature releases
+- Trends and shifts in the AI tools landscape
+- Practical AI adoption in business and workflows
+- AI agent frameworks and automation tools
+- Foundation model updates relevant to end users (e.g. GPT, Claude, Gemini, Llama)
+
+You will be given an article title and summary. Score the article's relevance on a scale of 1 to 10, where:
+- 1–3: Not relevant (pure hardware, unrelated tech, theoretical research with no practical angle)
+- 4–6: Marginally relevant (touches AI but not the core focus areas)
+- 7–10: Relevant (directly covers AI tools, SaaS, adoption, agents, or model updates for end users)
+
+Article Title: {title}
+Article Summary: {summary}
+
+Return ONLY a valid JSON object in exactly this format — no markdown, no code fences, no explanation, no preamble:
+{{"relevance_score": <integer 1-10>, "relevance_reason": "<one sentence explanation>", "is_relevant": <true if score >= 7, false otherwise>}}
