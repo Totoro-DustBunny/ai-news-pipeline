@@ -9,24 +9,36 @@
         "AI Strategy",
         "Statistics"
       ],
+      "writing_style": {
+        "hook_style": "She opens posts with thought-provoking quotes or questions that encourage discussion.",
+        "structure": "Her posts are concise and to the point, often consisting of a single sentence or phrase.",
+        "credibility": "She builds authority by referencing her expertise and experience in AI and statistics.",
+        "engagement": "She closes posts with an invitation for further discussion or a call to action, such as waiting for a follow-up article.",
+        "style_tag": "Insightful Provocative",
+        "confidence": 8,
+        "source": "dynamic"
+      },
       "posts": [
         {
-          "title": "Cassie Kozyrkov - Wikipedia",
-          "snippet": "Cassie Kozyrkov is a South African data scientist and statistician. She served as Chief Decision Scientist at Google and founded Decision Intelligence. [1][2][3]",
-          "url": "https://en.wikipedia.org/wiki/Cassie_Kozyrkov",
-          "date": "None"
+          "title": "The age of “prompt engineering” is over. | Cassie Kozyrkov",
+          "snippet": "Cassie Kozyrkov Cassie Kozyrkov is an Influencer. 7mo.@Cassie Kozyrkov said it best: “Vague thinking is a liability.” That’s no longer philosophical—it’s now programmable.",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7326639276165640195/?updateEntityUrn=urn:li:fs_updateV2:(urn:li:activity:7326639276165640195,FEED_DETAIL,EMPTY,DEFAULT,false)",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Cassie Kozyrkov - CEO, Google's first Chief ... - LinkedInCassie Kozyrkov - WikipediaCassie Kozyrkov on what AI means for leadership - celonis.comHome | Cassie Kozyrkov - LinkedInExcited to speak at Applied AI Nordics 2024 | Cassie Kozyrkov ...Cassie Kozyrkov on LinkedIn: Bold prediction for 2024 ...Cassie Kozyrkov on LinkedIn: IBM Think 2024: The nerve center ...",
-          "snippet": "Cassie is Google’s former Chief Decision Scientist and a sought-after AI advisor, working with senior leaders at places like Lenovo, NASA, and Gucci. She is currently CEO of Data Scientific and... Cassie Kozyrkov is a South African data scientist and statistician. She served as Chief Decision Scientist at Google and founded Decision Intelligence. [1][2][3] Apr 1, 2025 · In a Face Value talk, Google’s first Chief Decision Scientist Cassie Kozyrkov discusses the human element in AI and what it means for leadership. CEO, Google's first Chief Decision Scientist, AI Adviser, Decision Strategist, Keynote Speaker (makecassietalk.com), LinkedIn Top Voice. Curious to know the top 10 tech trends in customer... If you’re planning to introduce a new way of thinking about AI to executives, it could be particularly impactful to emphasize the real-world applications and outcomes of using AI effectively. It feels as if: 1- The AI does not understand what a hand is (shocking!) and is just trying to push pixels, or 2-The AI is just weird-flexing : \"so you have trouble drawing 5 fingers? watch me... Welcome to Pt. 2 of 'Cassie Vlogs at Conferences': IBM Think 2024 Edition. Join me for a tour of IBM 's latest releases and to hear why, \"Is AI smarter than us?\" ... is the wrong question to...",
-          "url": "https://www.linkedin.com/in/kozyrkov",
-          "date": "None"
+          "title": "Developing Your AI Strategy: A Framework for Leadership by Cassie...",
+          "snippet": "View profile for Cassie Kozyrkov. Cassie Kozyrkov Cassie Kozyrkov is an Influencer.Cassie Kozyrkov What's the biggest \"poet's lie\" you've come across in your journey with AI?",
+          "url": "https://www.linkedin.com/posts/kozyrkov_developing-your-ai-strategy-a-framework-activity-7264386026574417920-24uD",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Cassie Kozyrkov on what AI means for leadership - celonis.com",
-          "snippet": "Apr 1, 2025 · In a Face Value talk, Google’s first Chief Decision Scientist Cassie Kozyrkov discusses the human element in AI and what it means for leadership.",
-          "url": "https://www.celonis.com/blog/cassie-kozyrkov-on-what-ai-means-for-leadership",
-          "date": "None"
+          "title": "Why I quit my job as Google’s Chief Decision Scientist | Cassie...",
+          "snippet": "View profile for Cassie Kozyrkov. Cassie Kozyrkov Cassie Kozyrkov is an Influencer.Cassie Kozyrkov Such an insightful read. I’ll be waiting for part 2 whenever it comes.",
+          "url": "https://www.linkedin.com/posts/kozyrkov_why-i-quit-my-job-as-googles-chief-decision-activity-7124141632542679040-oYo7",
+          "date": "None",
+          "is_placeholder": false
         }
       ]
     },
@@ -39,24 +51,36 @@
         "AI Education",
         "LLMs"
       ],
+      "writing_style": {
+        "hook_style": "Opens with a concrete field observation or surprising AI adoption data point",
+        "structure": "Narrative flow with clear sections and analogies to simplify complex ideas",
+        "credibility": "Cites real course data, student outcomes, and industry partnerships",
+        "engagement": "Closes with an invitation to learn more — links to course, paper, or resource",
+        "style_tag": "Instructional + Narrative",
+        "confidence": 6,
+        "source": "fallback"
+      },
       "posts": [
         {
-          "title": "Andrew Ng - Wikipedia",
-          "snippet": "3 days ago - He has founded Landing AI, which provides AI-powered SaaS products. On April 11, 2024, Amazon announced Ng's appointment to its board of directors. Andrew Yan-Tak Ng was born in London, in 1976 to Ronald Paul Ng, a hematologist and lecturer at UCL Medical School, and Tisa Ho, an arts administrator ...",
-          "url": "https://en.wikipedia.org/wiki/Andrew_Ng",
-          "date": "None"
+          "title": "Future-Proof Your Career with AI: Andrew Ng’s 2026 Insights",
+          "snippet": "Jan 19, 2026 · Andrew Ng just exposed the AI job apocalypse as hype. At Davos 2026, the AI pioneer revealed: AI can only do 30-40% of most jobs. Humans still own 60-70% of the work.",
+          "url": "https://www.linkedin.com/pulse/how-future-proof-your-career-ai-why-andrew-ngs-davos-warning-kumar-l-hesbc",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Andrew Ng - DeepLearning.AI, AI Fund and AI Aspire | LinkedIn",
-          "snippet": "April 10, 2025 - DeepLearning.AI, AI Fund and AI Aspire · Personal home page: http://andrewng.org · Experience: DeepLearning.AI · Education: University of California, Berkeley · Location: Palo Alto · 500+ connections on LinkedIn. View Andrew Ng’s profile on LinkedIn, a professional community of 1 billion members.",
-          "url": "https://www.linkedin.com/in/andrewyng/",
-          "date": "None"
+          "title": "Turing-AGI Test: Measuring AI's Work Capabilities | Andrew Ng ...",
+          "snippet": "Happy 2026! Will this be the year we finally achieve AGI? I’d like to propose a new version of the Turing Test, which I’ll call the Turing-AGI Test, to see if we’ve achieved this.",
+          "url": "https://www.linkedin.com/posts/andrewyng_new-year-special-hopes-for-2026-from-david-activity-7414344486350331904-885y",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Andrew Ng - Official Website",
-          "snippet": "Dr. Ng now focuses his time primarily on providing AI training and on his entrepreneurial ventures, looking for the best ways to accelerate responsible AI adoption globally. ... Andrew's weekly letters, delivered to your inbox.",
-          "url": "https://www.andrewng.org/",
-          "date": "None"
+          "title": "Andrew Ng says 2026 is the BEST year in history to break into ...",
+          "snippet": "Andrew Ng says 2026 is the BEST year in history to break into AI Here are his 10 principles to break in before the barrier rises👇 His AI Career Advice : 1.",
+          "url": "https://www.linkedin.com/posts/chorouk-malmoum_andrew-ng-says-2026-is-the-best-year-in-history-activity-7412812767780507648-IoWt",
+          "date": "None",
+          "is_placeholder": false
         }
       ]
     },
@@ -69,24 +93,36 @@
         "Business Strategy",
         "Startups"
       ],
+      "writing_style": {
+        "hook_style": "Allie K. Miller starts her posts with a personal anecdote or a reference to a recent event or experience.",
+        "structure": "She uses a concise and informal formatting approach, often including short sentences and colloquial expressions.",
+        "credibility": "She builds authority by referencing her professional background and experiences with well-known companies like Amazon and IBM.",
+        "engagement": "She encourages engagement by expressing her personal opinions and predictions, and inviting others to share their thoughts or goals.",
+        "style_tag": "Insightful Futurist",
+        "confidence": 8,
+        "source": "dynamic"
+      },
       "posts": [
         {
-          "title": "Allie K. Miller - Wikipedia",
-          "snippet": "Allie K. Miller is an American businesswoman and artificial intelligence (AI) advisor and innovator. [1] She is best known for her role as the former global head of machine learning for startups and venture capital at Amazon Web Services (AWS) and for launching IBM Watson 's first multimodal AI team. [2][3][4] Miller founded and is currently CEO of Open Machine, an advisory firm specializing ...",
-          "url": "https://en.wikipedia.org/wiki/Allie_K._Miller",
-          "date": "None"
+          "title": "2026 AI Predictions: Context Engineering, Autonomy... | LinkedIn",
+          "snippet": "View profile for Allie K. Miller. Allie K. Miller Allie K. Miller is an Influencer. 2d. Report this post.Amazing framing of 2026, Allie - especially the *shift from smart AI to economically valuable AI and proactive agents reshaping how work actually gets done.",
+          "url": "https://www.linkedin.com/posts/alliekmiller_my-2026-ai-predictions-just-dropped-and-activity-7411513306324193280-xTkF",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Allie K. Miller - #1 Most Followed Voice in AI Business (2M) - LinkedIn",
-          "snippet": "View Allie K. Miller's profile on LinkedIn, a professional community of 1 billion members.",
-          "url": "https://www.linkedin.com/in/alliekmiller",
-          "date": "None"
+          "title": "I was at CES 2026 in Vegas last week. Here's what actually stood out...",
+          "snippet": "Samsung fridge was a standout. Voice-enabled devices were present but a bit underwhelming. Tested a voice-enabled air fryer from Emerson. We're not there yet in hardware (didn't help that the internet at CES was non-functional), but I still think voice will explode in 2026.",
+          "url": "https://www.linkedin.com/posts/alliekmiller_i-was-at-ces-2026-in-vegas-last-week-heres-activity-7416920736306495488-khrI",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Allie K. Miller",
-          "snippet": "Allie Miller is a top artificial intelligence leader, advisor, and investor. | 1MM+ followers | Former Amazon, IBM | LinkedIn Top Voice for AI 2019-2023 | @alliekmiller on Instagram, Twitter, TikTok",
-          "url": "https://www.alliekmiller.com/",
-          "date": "None"
+          "title": "2026 AI Strategy: Leveraging Predictions for Success | Allie K. Miller...",
+          "snippet": "View profile for Allie K. Miller. Allie K. Miller Allie K. Miller is an Influencer. 6d. Report this post.My primary goal for 2026 is to [your specific KPI or objective - be specific with numbers if possible], following my efforts in 2025 to [what you did this past year to deliver on your goal].",
+          "url": "https://www.linkedin.com/posts/alliekmiller_this-is-how-you-turn-ai-predictions-into-activity-7414373693914546177-G7HU",
+          "date": "None",
+          "is_placeholder": false
         }
       ]
     },
@@ -99,24 +135,36 @@
         "Machine Learning",
         "AI Trends"
       ],
+      "writing_style": {
+        "hook_style": "Directly stating an event or fact to grab attention",
+        "structure": "Using simple and concise sentences to convey information",
+        "credibility": "Establishing authority through professional titles and credentials",
+        "engagement": "Not explicitly asking for engagement, but rather stating facts and events",
+        "style_tag": "Informative Expert",
+        "confidence": 6,
+        "source": "dynamic"
+      },
       "posts": [
         {
-          "title": "Meet the Humans of Data: Kirk Borne - Atlan | Humans of Data",
-          "snippet": "Kirk Borne, Principal Data Scientists at Booz Allen Hamilton is one of the most influential data science leaders around the world.",
-          "url": "https://humansofdata.atlan.com/2020/01/meet-the-humans-of-data-kirk-borne/",
-          "date": "None"
+          "title": "RSAC 2026 | Commvault | Meet with us! | Kirk Borne, Ph.D.",
+          "snippet": "It's coming—RSAC 2026—the world's largest & most influential annual Cybersecurity Conference.Kirk, events like this create valuable opportunities for connection and learning.",
+          "url": "https://www.linkedin.com/posts/kirkdborne_rsac-2026-commvault-meet-with-us-activity-7439691092960174080-nmSe",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "13 Data Science Leaders & Influencers To Follow | Atlan",
-          "snippet": "Principal Data Scientist at Booz Allen Hamilton, Kirk aka “Captain Kirk” is one of the top influencers you must follow, if you’re not following ...",
-          "url": "https://humansofdata.atlan.com/2019/10/data-science-leaders-and-influencers-you-must-follow/",
-          "date": "None"
+          "title": "Join Commvault next week at RSAC 2026: https...",
+          "snippet": "Kirk Borne, Ph.D. Kirk Borne, Ph.D. is an Influencer. 2d.To view or add a comment, sign in. Kirk Borne, Ph.D. 98,907 followers.",
+          "url": "https://www.linkedin.com/posts/kirkdborne_join-commvault-next-week-at-rsac-2026-https-activity-7439449046316003331-OIz8",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Data Science: Interview with Kirk Borne, Principal Data",
-          "snippet": "We thank Kirk Borne for participating in the Data Science Interview Series 2020 by sharing such accurate and inspiring reflections from his ...",
-          "url": "https://www.aitimejournal.com/data-science-interview-with-kirk-borne-principal-data-scientist-booz-allen-hamilton/",
-          "date": "None"
+          "title": "New release from Packt Publishing... \"Agentic Architectural Patterns for...",
+          "snippet": "Kirk Borne, Ph.D. Kirk Borne, Ph.D. is an Influencer. 2mo.To view or add a comment, sign in. Kirk Borne, Ph.D. 99,232 followers.",
+          "url": "https://www.linkedin.com/posts/kirkdborne_new-release-frompackt-publishing-agentic-activity-7424495938544652289-grf7",
+          "date": "None",
+          "is_placeholder": false
         }
       ]
     },
@@ -129,24 +177,36 @@
         "Future of Work",
         "Generative AI"
       ],
+      "writing_style": {
+        "hook_style": "They open posts with a brief and intriguing statement that grabs the reader's attention",
+        "structure": "Their formatting approach is concise and to the point, often using short sentences and colons to introduce lists or explanations",
+        "credibility": "They build authority by referencing reputable sources and events, such as the Stanford AI Index Report and NVIDIA GTC",
+        "engagement": "Their closing style is more informative than interactive, with no explicit call-to-action, relying on the reader's interest in the topic to drive engagement",
+        "style_tag": "Informative Technical",
+        "confidence": 8,
+        "source": "dynamic"
+      },
       "posts": [
         {
-          "title": "Steve Nouri on LinkedIn: AI Revolution 2024: Google's Gemini ...",
-          "snippet": "AI Revolution 2024: Google's Gemini Emerges, Microsoft Supercharges Copilot, and OpenAI's Trademark Tussle - A New Era in Technology Unfolds Elon Musk's Neuralink Shifts Roblox Breaks Language ...",
-          "url": "https://www.linkedin.com/posts/stevenouri_ai-revolution-2024-googles-gemini-emerges-activity-7163165980565651458-VIWv",
-          "date": "None"
+          "title": "The state of AI 2026; Anthropic released; Google just dropped a tool for...",
+          "snippet": "Here are 20 interesting points from the Stanford AI Index Report 2026, distilled into the ones most worth knowing. AI capability is still accelerating, not plateauing.",
+          "url": "https://www.linkedin.com/pulse/state-ai-2026-anthropic-released-google-just-dropped-tool-steve-nouri-is9fc",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "Steve Nouri's Post - LinkedIn",
-          "snippet": "2024 Will Not Be The Year of Generative AI: A Look Ahead Through the Lens of 2023. Christmas Gift💖 Steve Nouri on LinkedIn 510 33 Comments See more comments 2,725 Posts 158 Articles",
-          "url": "https://www.linkedin.com/posts/stevenouri_2024-will-not-be-the-year-of-generative-ai-activity-7146412159277645824-Rvz1",
-          "date": "None"
+          "title": "NVIDIA GTC 2026 Recap: Open Models, Vera CPU... | LinkedIn",
+          "snippet": "NVIDIA GTC 2026 was unbelievable! here is what you missed: Nemotron Coalition They launched a new coalition with major AI labs and companies to help build open frontier models and...",
+          "url": "https://www.linkedin.com/posts/stevenouri_nvidiapartner-activity-7440051059617869824-9axo",
+          "date": "None",
+          "is_placeholder": false
         },
         {
-          "title": "AI videos for 2023: a game changer | Steve Nouri posted on ... - LinkedIn",
-          "snippet": "2024 is going to be epic for AI videos!🎥 Remember those kinda funny, kinda weird AI-generated videos from 2023? They were all blocky and odd, and we all… | 219 comments on LinkedIn",
-          "url": "https://www.linkedin.com/posts/stevenouri_2024-is-going-to-be-epic-for-ai-videos-activity-7165679709370957824-XcsC",
-          "date": "None"
+          "title": "Designing Reliable AI Apps: The New Bottleneck | Steve Nouri posted...",
+          "snippet": "But here’s the bigger point about AI app building in 2026 (this is what matters): The bottleneck isn’t “writing code” anymore It’s designing reliable behavior.",
+          "url": "https://www.linkedin.com/posts/stevenouri_90-of-ai-app-builders-miss-this-important-activity-7434207377660338176-7f7T",
+          "date": "None",
+          "is_placeholder": false
         }
       ]
     }

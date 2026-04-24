@@ -998,7 +998,32 @@ a:hover {
   padding: 16px;
 }
 
+/* Placeholder post card */
+
+.kol-post-card.is-placeholder {
+  border-style: dashed;
+  border-color: var(--color-warm);
+  background: #FFFDF5;
+}
+
+.kol-placeholder-banner {
+  font-size: 11px;
+  font-weight: 500;
+  color: #7A5200;
+  background: #FFF3CD;
+  border-bottom: 1px solid #F0D080;
+  padding: 6px 14px;
+  margin: -14px -16px 12px;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+
+/* Style tag row — flex to hold tag + badge + confidence */
+
 .kol-style-tag-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 14px;
 }
 
@@ -1012,6 +1037,34 @@ a:hover {
   letter-spacing: 0.07em;
   border-radius: 3px;
   padding: 3px 10px;
+}
+
+/* Source badge: dynamic vs fallback */
+
+.kol-style-source-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kol-style-source-dynamic {
+  background: rgba(139, 139, 53, 0.15);
+  color: #4A4A00;
+}
+
+.kol-style-source-fallback {
+  background: var(--color-border);
+  color: var(--color-text-light);
+}
+
+.kol-style-confidence {
+  font-size: 11px;
+  color: var(--color-text-light);
+  margin-left: auto;
 }
 
 .kol-analysis-grid {
