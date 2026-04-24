@@ -82,13 +82,13 @@ Respond in valid JSON only, with exactly these three fields:
 # ── DB helpers ────────────────────────────────────────────────────────────────
 
 def fetch_source_articles(category: str, limit: int = 5) -> list[dict]:
-    """Return up to `limit` relevant articles for the given category."""
+    """Return up to `limit` relevant articles for the given category, including url."""
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     cur.execute(
         """
-        SELECT title, relevance_reason
+        SELECT title, url, relevance_reason
         FROM   articles
         WHERE  is_relevant = 1
           AND  category    = ?
@@ -201,7 +201,7 @@ def generate_post(client: OpenAI, category: str) -> dict:
         "image_brief":     meta.get("image_brief",     ""),
         "target_audience": meta.get("target_audience", ""),
         "tone":            meta.get("tone",            ""),
-        "source_articles": [a["title"] for a in articles],
+        "source_articles": [{"title": a["title"], "url": a.get("url")} for a in articles],
     }
 
 

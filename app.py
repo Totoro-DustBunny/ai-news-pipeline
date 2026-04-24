@@ -120,11 +120,39 @@ def api_kol_posts():
 
 @app.route("/api/linkedin-posts")
 def api_linkedin_posts():
-    """Return LinkedIn posts from data/linkedin_posts.json, or a placeholder if not yet generated."""
+    """Return LinkedIn posts from data/linkedin_posts.json, or a placeholder if not yet generated.
+
+    Enriches source_articles on the fly: if items are plain title strings (old format),
+    looks up the matching URL from the articles DB and returns {title, url} objects.
+    """
     if not LI_PATH.exists():
         return jsonify({"status": "not_generated", "data": []})
+
     with open(LI_PATH, "r", encoding="utf-8") as f:
-        return jsonify({"status": "ok", "data": json.load(f)})
+        data = json.load(f)
+
+    # Build a title→url lookup from the articles DB (one query, all titles)
+    conn = get_db()
+    url_map = {
+        row["title"]: row["url"]
+        for row in conn.execute("SELECT title, url FROM articles WHERE url IS NOT NULL").fetchall()
+    }
+    conn.close()
+
+    for post in data.get("posts", []):
+        enriched = []
+        for item in post.get("source_articles", []):
+            if isinstance(item, dict):
+                # Already enriched — pass through, backfill url if missing
+                if not item.get("url"):
+                    item["url"] = url_map.get(item.get("title", ""))
+                enriched.append(item)
+            else:
+                # Legacy string — convert to {title, url}
+                enriched.append({"title": item, "url": url_map.get(item)})
+        post["source_articles"] = enriched
+
+    return jsonify({"status": "ok", "data": data})
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────

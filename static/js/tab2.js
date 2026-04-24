@@ -1,11 +1,14 @@
 /**
  * tab2.js — Relevance Scoring tab
- * Fetches /api/stats (distribution bar + filter counts)
- * and /api/articles (full article card list with filtering).
+ * Fetches /api/articles and renders the distribution bar,
+ * filter buttons, and article card list.
+ * Frontend relevance threshold: score >= 8.
  */
 (async function initTab2() {
 
-  let allArticles  = [];
+  const THRESHOLD = 8;
+
+  let allArticles   = [];
   let currentFilter = 'all';
 
   // ── Criteria tag inference ──────────────────────────────────────────────────
@@ -27,11 +30,12 @@
   }
 
   // ── Score badge CSS class ────────────────────────────────────────────────────
+  // Green >= 8 | Amber 5–7 | Grey <= 4
 
   function scoreBadgeClass(score) {
     if (score === null || score === undefined) return 'score-badge-low';
-    if (score >= 7) return 'score-badge-high';
-    if (score >= 4) return 'score-badge-mid';
+    if (score >= THRESHOLD) return 'score-badge-high';
+    if (score >= 5)         return 'score-badge-mid';
     return 'score-badge-low';
   }
 
@@ -50,7 +54,7 @@
 
   function renderCard(a) {
     const score      = a.relevance_score;
-    const isRelevant = a.is_relevant === 1 || a.is_relevant === true;
+    const isRelevant = (score !== null && score !== undefined) && score >= THRESHOLD;
     const reason     = a.relevance_reason || 'No explanation recorded.';
     const tags       = inferCriteriaTags(reason);
     const badgeClass = scoreBadgeClass(score);
@@ -64,9 +68,6 @@
       ? `<span class="relevance-pill relevance-pill-yes">&#10003; Relevant</span>`
       : `<span class="relevance-pill relevance-pill-no">&#10007; Below Threshold</span>`;
 
-    const title = (a.title || '(No title)')
-      .replace(/&#\d+;/g, c => { const tmp = document.createElement('textarea'); tmp.innerHTML = c; return tmp.value; });
-
     return `
       <div class="article-card ${isRelevant ? '' : 'faded'}" data-relevant="${isRelevant ? '1' : '0'}">
         <div class="article-card-top">
@@ -79,6 +80,7 @@
         <div class="article-card-bottom">
           <span class="article-date">${fmtDate(a.published_date)}</span>
           ${pillHtml}
+          ${a.url ? `<a class="article-read-link" href="${a.url}" target="_blank" rel="noopener noreferrer">Read Article →</a>` : ''}
         </div>
       </div>`;
   }
@@ -90,7 +92,7 @@
     if (!listEl) return;
 
     const filtered = filter === 'relevant'
-      ? allArticles.filter(a => a.is_relevant === 1 || a.is_relevant === true)
+      ? allArticles.filter(a => (a.relevance_score ?? 0) >= THRESHOLD)
       : allArticles;
 
     if (!filtered.length) {
@@ -101,21 +103,14 @@
     listEl.innerHTML = `<div class="article-list">${filtered.map(renderCard).join('')}</div>`;
   }
 
-  // ── Update filter button labels with live counts ─────────────────────────────
+  // ── Render score distribution bar (computed from articles) ───────────────────
 
-  function updateFilterBtns(stats) {
-    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
-    const relBtn = document.querySelector('.filter-btn[data-filter="relevant"]');
-    if (allBtn) allBtn.textContent = `All (${stats.total})`;
-    if (relBtn) relBtn.textContent = `Relevant Only (${stats.relevant})`;
-  }
-
-  // ── Render score distribution bar ────────────────────────────────────────────
-
-  function renderDistBar(stats) {
-    const total  = stats.total || 1;
-    const relPct = Math.round((stats.relevant / total) * 100);
-    const notPct = 100 - relPct;
+  function renderDistBar(articles) {
+    const total       = articles.length || 1;
+    const relevantCnt = articles.filter(a => (a.relevance_score ?? 0) >= THRESHOLD).length;
+    const notCnt      = total - relevantCnt;
+    const relPct      = Math.round((relevantCnt / total) * 100);
+    const notPct      = 100 - relPct;
 
     const relFill  = document.getElementById('bar-relevant-fill');
     const notFill  = document.getElementById('bar-not-fill');
@@ -124,8 +119,19 @@
 
     if (relFill)  relFill.style.width  = `${relPct}%`;
     if (notFill)  notFill.style.width  = `${notPct}%`;
-    if (relLabel) relLabel.textContent = `${stats.relevant} Relevant (${relPct}%)`;
-    if (notLabel) notLabel.textContent = `${stats.not_relevant} Not Relevant (${notPct}%)`;
+    if (relLabel) relLabel.textContent = `${relevantCnt} Relevant (${relPct}%)`;
+    if (notLabel) notLabel.textContent = `${notCnt} Not Relevant (${notPct}%)`;
+  }
+
+  // ── Update filter button labels with live counts ─────────────────────────────
+
+  function updateFilterBtns(articles) {
+    const total       = articles.length;
+    const relevantCnt = articles.filter(a => (a.relevance_score ?? 0) >= THRESHOLD).length;
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    const relBtn = document.querySelector('.filter-btn[data-filter="relevant"]');
+    if (allBtn) allBtn.textContent = `All (${total})`;
+    if (relBtn) relBtn.textContent = `Relevant Only (${relevantCnt})`;
   }
 
   // ── Wire filter buttons ──────────────────────────────────────────────────────
@@ -142,15 +148,12 @@
   // ── Fetch data and render ────────────────────────────────────────────────────
 
   try {
-    const [stats, articles] = await Promise.all([
-      window.fetchData('/api/stats'),
-      window.fetchData('/api/articles'),
-    ]);
+    const articles = await window.fetchData('/api/articles');
 
     allArticles = articles;
 
-    renderDistBar(stats);
-    updateFilterBtns(stats);
+    renderDistBar(articles);
+    updateFilterBtns(articles);
     renderList(currentFilter);
 
   } catch (err) {

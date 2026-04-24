@@ -1715,3 +1715,27 @@ a:hover {
     font-size: 20px;
   }
 }
+
+/* ── Article read links (Tabs 2 & 3) ────────────────────────────────────────── */
+
+.article-read-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-blue);
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.article-read-link:hover { text-decoration: underline; }
+
+/* ── LinkedIn source article links (Tab 5) ───────────────────────────────────── */
+
+.li-source-link {
+  color: var(--color-blue);
+  text-decoration: none;
+  border-color: var(--color-blue);
+}
+.li-source-link:hover {
+  text-decoration: underline;
+  background: #EEF4FB;
+}

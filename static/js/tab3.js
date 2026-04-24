@@ -2,9 +2,12 @@
  * tab3.js — Classification tab
  * Renders category summary cards, an animated bar chart,
  * filter pills, and a classified article list.
- * All data comes from /api/stats and /api/articles.
+ * Only articles with relevance_score >= THRESHOLD are shown.
+ * Counts are derived from /api/articles directly (not /api/stats).
  */
 (async function initTab3() {
+
+  const THRESHOLD = 8;
 
   // ── Category config — single source of truth for labels, colors, HW mapping ──
 
@@ -12,31 +15,31 @@
     {
       key:       'New AI Tools & Product Launches',
       shortLabel:'New AI Tools',
-      color:     '#6B9BD2',   // --color-blue
+      color:     '#6B9BD2',
       hwLabel:   'Product and Service Innovation',
     },
     {
       key:       'AI Trends & Market Movements',
       shortLabel:'AI Trends',
-      color:     '#8B8B35',   // --color-olive
+      color:     '#8B8B35',
       hwLabel:   'Strategy and Executive Decision-Making',
     },
     {
       key:       'Practical AI Use Cases',
       shortLabel:'Practical Use Cases',
-      color:     '#8BBFCC',   // --color-cyan
+      color:     '#8BBFCC',
       hwLabel:   'Industry-Specific AI Use Cases',
     },
     {
       key:       'Foundation Models & Platforms',
       shortLabel:'Foundation Models',
-      color:     '#C9B882',   // --color-warm
+      color:     '#C9B882',
       hwLabel:   'Infrastructure, Models, and Platforms',
     },
     {
       key:       'AI Governance & Ethics',
       shortLabel:'Governance & Ethics',
-      color:     '#8B7FA3',   // --color-violet
+      color:     '#8B7FA3',
       hwLabel:   'Governance, Ethics, and Regulation',
     },
   ];
@@ -59,10 +62,20 @@
     } catch { return str; }
   }
 
-  function buildCountMap(categories) {
+  // Build {category: count} map directly from the filtered article array
+  function buildCountMap(articles) {
     const map = {};
-    categories.forEach(c => { map[c.category] = c.count; });
+    articles.forEach(a => {
+      if (a.category) map[a.category] = (map[a.category] || 0) + 1;
+    });
     return map;
+  }
+
+  // ── Section A: Dynamic subtitle count ────────────────────────────────────────
+
+  function updateSubtitle(count) {
+    const el = document.getElementById('tab3-article-count');
+    if (el) el.textContent = count;
   }
 
   // ── Section B: Category cards ─────────────────────────────────────────────────
@@ -87,8 +100,8 @@
 
     inner.innerHTML = `<div class="bar-chart-rows">${
       CATEGORIES.map(cat => {
-        const count  = countMap[cat.key] ?? 0;
-        const pct    = Math.round((count / maxCount) * 100);
+        const count = countMap[cat.key] ?? 0;
+        const pct   = Math.round((count / maxCount) * 100);
         return `
           <div class="bar-chart-row">
             <span class="bar-label">${cat.shortLabel}</span>
@@ -103,17 +116,14 @@
     }</div>`;
   }
 
-  // Trigger CSS width transition on all bar fills
   function animateBars() {
     document.querySelectorAll('#cat-bar-chart-inner .bar-fill').forEach(bar => {
-      // Double rAF + tiny timeout ensures the 0% width has been painted first
       requestAnimationFrame(() => {
         setTimeout(() => { bar.style.width = `${bar.dataset.pct}%`; }, 40);
       });
     });
   }
 
-  // Watch for tab-3 becoming active so bars animate each time it's opened
   const tab3El = document.getElementById('tab-3');
   if (tab3El) {
     new MutationObserver(mutations => {
@@ -127,11 +137,11 @@
 
   // ── Section D: Filter pills ───────────────────────────────────────────────────
 
-  function renderFilterPills(countMap, totalClassified) {
+  function renderFilterPills(countMap, total) {
     const row = document.getElementById('cat-filter-row');
     if (!row) return;
 
-    const allPill  = `<button class="cat-pill active" data-cat="all">All (${totalClassified})</button>`;
+    const allPill  = `<button class="cat-pill active" data-cat="all">All (${total})</button>`;
     const catPills = CATEGORIES.map(cat =>
       `<button class="cat-pill" data-cat="${cat.key}">${cat.shortLabel} (${countMap[cat.key] ?? 0})</button>`
     ).join('');
@@ -165,6 +175,7 @@
         <div class="classified-card-bottom">
           <span class="source-pill">${a.source_name || ''}</span>
           <span class="classified-date">${fmtDate(a.published_date)}</span>
+          ${a.url ? `<a class="article-read-link" href="${a.url}" target="_blank" rel="noopener noreferrer">Read Article →</a>` : ''}
         </div>
       </div>`;
   }
@@ -187,20 +198,21 @@
   // ── Fetch and render ──────────────────────────────────────────────────────────
 
   try {
-    const [stats, articles] = await Promise.all([
-      window.fetchData('/api/stats'),
-      window.fetchData('/api/articles'),
-    ]);
+    const articles = await window.fetchData('/api/articles');
 
-    classifiedArticles = articles.filter(a => a.category);
-    const countMap     = buildCountMap(stats.categories);
+    // Apply the same frontend threshold as Tabs 1 & 2
+    classifiedArticles = articles.filter(
+      a => a.category && (a.relevance_score ?? 0) >= THRESHOLD
+    );
 
+    const countMap = buildCountMap(classifiedArticles);
+
+    updateSubtitle(classifiedArticles.length);
     renderCatCards(countMap);
     renderBarChart(countMap);
     renderFilterPills(countMap, classifiedArticles.length);
     renderArticleList(currentFilter);
 
-    // If already on tab-3 on page load, fire bars immediately
     if (tab3El && tab3El.classList.contains('active')) animateBars();
 
   } catch (err) {

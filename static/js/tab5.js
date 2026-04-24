@@ -35,9 +35,15 @@
       .replace(/>/g, '&gt;');
     const contentHtml = highlightHashtags(escapedContent);
 
-    // Source pills
+    // Source pills — items are {title, url} objects (enriched by API) or legacy strings
     const sourcePills = sources.length
-      ? sources.map(t => `<span class="li-source-pill">${t}</span>`).join('')
+      ? sources.map(s => {
+          const title = typeof s === 'string' ? s : (s.title || '');
+          const url   = typeof s === 'string' ? null : s.url;
+          return url
+            ? `<a class="li-source-pill li-source-link" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`
+            : `<span class="li-source-pill">${title}</span>`;
+        }).join('')
       : '<span class="li-source-pill">No source articles recorded</span>';
 
     return `
