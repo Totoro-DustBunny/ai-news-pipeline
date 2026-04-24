@@ -24,6 +24,7 @@
     const category    = post.category || 'Uncategorized';
     const content     = post.content  || '';
     const imageBrief  = post.image_brief     || '';
+    const imagePath   = post.image_path      || null;
     const audience    = post.target_audience || '';
     const tone        = post.tone            || '';
     const sources     = post.source_articles || [];
@@ -63,8 +64,17 @@
 
           <div class="li-content-box">${contentHtml}</div>
 
-          <p class="li-image-brief-label">&#128444;&#65039; Image / Visual Brief</p>
-          <div class="li-image-brief-box">${imageBrief || '(No image brief provided)'}</div>
+          ${imagePath
+            ? `<div class="li-post-image-wrap">
+                 <img class="li-post-image" src="${imagePath}" alt="AI-generated visual for ${category}" loading="lazy">
+                 <p class="li-image-caption">&#10024; AI-generated image · Gemini</p>
+               </div>`
+            : `<p class="li-image-brief-label">&#128444;&#65039; Image / Visual Brief</p>
+               <div class="li-image-brief-box">
+                 ${imageBrief || '(No image brief provided)'}
+                 <p class="li-image-brief-note">&#9888;&#65039; Image not generated — run <code>python scripts/generate_linkedin.py</code> with <code>GOOGLE_AI_STUDIO_KEY</code> set.</p>
+               </div>`
+          }
 
           <button class="li-sources-toggle" data-idx="${idx}" aria-expanded="false">
             &#128240; Source Articles Used (${sources.length})

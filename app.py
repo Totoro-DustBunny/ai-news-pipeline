@@ -140,17 +140,23 @@ def api_linkedin_posts():
     conn.close()
 
     for post in data.get("posts", []):
+        # Enrich source_articles with URLs
         enriched = []
         for item in post.get("source_articles", []):
             if isinstance(item, dict):
-                # Already enriched — pass through, backfill url if missing
                 if not item.get("url"):
                     item["url"] = url_map.get(item.get("title", ""))
                 enriched.append(item)
             else:
-                # Legacy string — convert to {title, url}
                 enriched.append({"title": item, "url": url_map.get(item)})
         post["source_articles"] = enriched
+
+        # Verify image_path exists on disk; null it out if the file is missing
+        img_path = post.get("image_path")
+        if img_path:
+            disk_path = ROOT_DIR / img_path.lstrip("/")
+            if not disk_path.exists():
+                post["image_path"] = None
 
     return jsonify({"status": "ok", "data": data})
 

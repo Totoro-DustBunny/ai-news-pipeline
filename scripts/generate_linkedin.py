@@ -1,12 +1,14 @@
 """
-generate_linkedin.py — LinkedIn post generator
-Uses OpenRouter (llama-4-maverick) to produce 3 thought-leadership
-LinkedIn posts — one per classification category — grounded in
-live articles from storage/articles.db.
+generate_linkedin.py — LinkedIn post generator with Gemini image generation
+Uses OpenRouter (llama-4-maverick) to produce 3 thought-leadership LinkedIn posts
+— one per classification category — grounded in live articles from articles.db.
+Uses Google Gemini to generate a matching image for each post.
 
 Saves results to data/linkedin_posts.json.
+Images saved to static/images/linkedin/post_{slug}.png.
 """
 
+import io
 import json
 import os
 import re
@@ -17,6 +19,19 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
+try:
+    from google import genai as google_genai
+    from google.genai import types as genai_types
+    HAS_GENAI = True
+except ImportError:
+    HAS_GENAI = False
+
+try:
+    from PIL import Image
+    HAS_PIL = True
+except ImportError:
+    HAS_PIL = False
+
 # ── Config ───────────────────────────────────────────────────────────────────
 
 load_dotenv()
@@ -24,8 +39,10 @@ load_dotenv()
 ROOT_DIR    = Path(__file__).parent.parent
 DB_PATH     = ROOT_DIR / "storage" / "articles.db"
 OUTPUT_PATH = ROOT_DIR / "data" / "linkedin_posts.json"
+IMAGES_DIR  = ROOT_DIR / "static" / "images" / "linkedin"
 
-MODEL = "meta-llama/llama-4-maverick"
+MODEL       = "meta-llama/llama-4-maverick"
+IMAGE_MODEL = "gemini-2.5-flash-image"
 
 OPENROUTER_HEADERS = {
     "HTTP-Referer": "https://github.com/ai-news-pipeline",
@@ -38,7 +55,6 @@ TARGET_CATEGORIES = [
     "Practical AI Use Cases",
 ]
 
-# Category color mapping (matches Tab 3)
 CATEGORY_COLORS = {
     "New AI Tools & Product Launches":  "#6B9BD2",
     "AI Trends & Market Movements":     "#8B8B35",
@@ -79,10 +95,18 @@ Respond in valid JSON only, with exactly these three fields:
 }}"""
 
 
+# ── Slug helper ───────────────────────────────────────────────────────────────
+
+def make_slug(category: str) -> str:
+    slug = category.lower()
+    slug = re.sub(r"[^a-z0-9\s]", "", slug)
+    slug = re.sub(r"\s+", "_", slug.strip())
+    return slug
+
+
 # ── DB helpers ────────────────────────────────────────────────────────────────
 
 def fetch_source_articles(category: str, limit: int = 5) -> list[dict]:
-    """Return up to `limit` relevant articles for the given category, including url."""
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
@@ -127,7 +151,6 @@ def make_client() -> OpenAI:
 
 
 def sanitize_json(raw: str) -> dict:
-    """Strip markdown fences, then extract and parse the first JSON object."""
     raw = re.sub(r"```(?:json)?", "", raw).strip("`").strip()
     match = re.search(r"\{.*\}", raw, re.DOTALL)
     if not match:
@@ -150,6 +173,59 @@ def call_llm(client: OpenAI, messages: list[dict], label: str = "") -> str:
         raise
 
 
+# ── Image generation ──────────────────────────────────────────────────────────
+
+def generate_image(brief: str, slug: str) -> str | None:
+    """Generate a 16:9 PNG via Gemini and return the relative web path, or None on failure."""
+    if not HAS_GENAI:
+        print("  [SKIP] google-generativeai not installed.")
+        return None
+    if not HAS_PIL:
+        print("  [SKIP] Pillow not installed.")
+        return None
+
+    api_key = os.getenv("GOOGLE_AI_STUDIO_KEY")
+    if not api_key:
+        print("  [SKIP] GOOGLE_AI_STUDIO_KEY not set — no image generated.")
+        return None
+
+    output_path = IMAGES_DIR / f"post_{slug}.png"
+    IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+
+    prompt = (
+        "Create a professional, visually striking illustration for a LinkedIn AI thought-leadership post. "
+        "Style: clean, modern, minimal — suitable for a corporate professional audience. "
+        "No text overlays, no logos. "
+        f"Visual concept: {brief}"
+    )
+
+    try:
+        client = google_genai.Client(api_key=api_key)
+        response = client.models.generate_content(
+            model=IMAGE_MODEL,
+            contents=prompt,
+            config=genai_types.GenerateContentConfig(
+                response_modalities=["image", "text"],
+            ),
+        )
+        img_bytes = None
+        for part in response.candidates[0].content.parts:
+            if part.inline_data and part.inline_data.data:
+                img_bytes = part.inline_data.data
+                break
+        if img_bytes is None:
+            print("  [WARN] No image data in Gemini response.")
+            return None
+        img = Image.open(io.BytesIO(img_bytes))
+        img.save(output_path, "PNG")
+        rel_path = f"/static/images/linkedin/post_{slug}.png"
+        print(f"  [OK] Image saved: {output_path.name}")
+        return rel_path
+    except Exception as e:
+        print(f"  [WARN] Image generation failed: {e}")
+        return None
+
+
 # ── Post generation ───────────────────────────────────────────────────────────
 
 def generate_post(client: OpenAI, category: str) -> dict:
@@ -159,7 +235,6 @@ def generate_post(client: OpenAI, category: str) -> dict:
         print(f"  [WARN] No articles found for '{category}'. Skipping source material.")
     article_block = format_articles_block(articles) if articles else "(No source articles available.)"
 
-    # Step 1: generate the post body
     print(f"  Generating post content...")
     post_content = call_llm(
         client,
@@ -173,7 +248,6 @@ def generate_post(client: OpenAI, category: str) -> dict:
         label="post",
     )
 
-    # Step 2: generate metadata
     print(f"  Generating metadata (image brief, audience, tone)...")
     time.sleep(0.5)
     meta_raw = call_llm(
@@ -194,11 +268,18 @@ def generate_post(client: OpenAI, category: str) -> dict:
             "tone":            "Thought leadership — analytical",
         }
 
+    slug       = make_slug(category)
+    image_path = None
+
+    print(f"  Generating image for '{category}'...")
+    image_path = generate_image(meta.get("image_brief", ""), slug)
+
     return {
         "category":        category,
         "color":           CATEGORY_COLORS.get(category, "#aaa"),
         "content":         post_content,
         "image_brief":     meta.get("image_brief",     ""),
+        "image_path":      image_path,
         "target_audience": meta.get("target_audience", ""),
         "tone":            meta.get("tone",            ""),
         "source_articles": [{"title": a["title"], "url": a.get("url")} for a in articles],
@@ -209,6 +290,13 @@ def generate_post(client: OpenAI, category: str) -> dict:
 
 def main():
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    # Skip-if-exists: if all 3 images already exist, offer to regenerate
+    slugs = [make_slug(c) for c in TARGET_CATEGORIES]
+    all_images_exist = all((IMAGES_DIR / f"post_{s}.png").exists() for s in slugs)
+    if all_images_exist and OUTPUT_PATH.exists():
+        print("All 3 posts and images already exist. Delete data/linkedin_posts.json to regenerate.")
+
     client = make_client()
     posts  = []
 
@@ -223,6 +311,7 @@ def main():
         print(f"\n--- GENERATED POST ---")
         print(post["content"])
         print(f"\n  Image brief:     {post['image_brief']}")
+        print(f"  Image path:      {post['image_path'] or '(none — generation failed or skipped)'}")
         print(f"  Target audience: {post['target_audience']}")
         print(f"  Tone:            {post['tone']}")
         print(f"  Source articles: {len(post['source_articles'])}")
@@ -235,8 +324,13 @@ def main():
         encoding="utf-8",
     )
 
+    images_ok  = sum(1 for p in posts if p.get("image_path"))
+    images_err = len(posts) - images_ok
+
     print(f"\n{'='*60}")
     print(f"Saved {len(posts)} posts to {OUTPUT_PATH}")
+    print(f"Images generated: {images_ok}/{len(posts)}"
+          + (f" ({images_err} failed/skipped)" if images_err else ""))
     print('='*60)
 
 

@@ -1792,3 +1792,33 @@ a:hover {
   text-decoration: underline;
   background: #EEF4FB;
 }
+
+/* ── LinkedIn post image (Tab 5) ─────────────────────────────────────────────── */
+
+.li-post-image-wrap {
+  margin: 16px 0 4px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+.li-post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.li-image-caption {
+  font-size: 11px;
+  color: var(--color-text-light);
+  text-align: right;
+  margin: 4px 0 12px;
+  padding-right: 2px;
+}
+.li-image-brief-note {
+  font-size: 11px;
+  color: #7A5200;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #E0C070;
+}
