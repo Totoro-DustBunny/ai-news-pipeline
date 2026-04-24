@@ -27,7 +27,7 @@ This pipeline was built around the following focus areas:
 - Agent frameworks and automation tools
 - Foundation model updates relevant to end users (GPT, Claude, Gemini, Llama, etc.)
 
-**Target audience:** AI enthusiasts, students, and industry professionals who want a curated, high-signal source of news around AI — to stay current on relevant developments, trends, and applications without manual curation.
+**Target audience:** AI enthusiasts, students, and industry professionals who want a curated, high-signal source of news around AI — to stay current on relevant developments, trends, and applications without manual web searches.
 
 ### Data Ingestion Window
 
@@ -142,28 +142,6 @@ Once the app is running at http://localhost:5000, navigate using the top tab bar
 | 05 | LinkedIn Content | 3 AI-generated LinkedIn posts with images, one per category |
 | 06 | Progress Report | Workflow architecture, challenges, prompt iterations, lessons learned |
 
----
-
-## Monitored Sources (12 Total)
-
-| Source | Category |
-|---|---|
-| Andreessen Horowitz (a16z) | VC & Tech Blogs |
-| Y Combinator (Hacker News) | VC & Tech Blogs |
-| Sequoia Capital | VC & Tech Blogs |
-| OpenAI | AI Company Blogs |
-| Google DeepMind | AI Company Blogs |
-| Microsoft AI Blog | AI Company Blogs |
-| Anthropic | AI Company Blogs |
-| MIT Technology Review | Tech & AI News |
-| The Verge (AI) | Tech & AI News |
-| TechCrunch (AI) | Tech & AI News |
-| Wired (AI) | Tech & AI News |
-| AI Business | Tech & AI News |
-
-> **Note:** ArXiv CS.AI was excluded after producing 334 articles in a single day — too voluminous for meaningful LLM-based filtering at reasonable API cost.
-
----
 
 ## Optional: Re-Running the Pipeline with Your Own API Keys
 
