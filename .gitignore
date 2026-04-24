@@ -24,7 +24,10 @@ env/
 *.swo
 
 # Storage — DB is regenerated from seed; never commit the binary
-storage/*.db
+# Covers storage/, data/, root, or any subdirectory
+*.db
+*.sqlite
+*.sqlite3
 
 # OS
 .DS_Store
