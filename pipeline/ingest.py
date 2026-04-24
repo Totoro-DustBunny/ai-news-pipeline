@@ -1,5 +1,6 @@
 # Ingestion module — fetches RSS/Atom feeds and stores raw articles in SQLite
 
+import json
 import sqlite3
 import feedparser
 import yaml
@@ -10,6 +11,7 @@ from pathlib import Path
 ROOT_DIR    = Path(__file__).resolve().parent.parent
 SOURCES_CFG = ROOT_DIR / "config" / "sources.yaml"
 DB_PATH     = ROOT_DIR / "storage" / "articles.db"
+SEED_PATH   = ROOT_DIR / "data" / "articles_seed.json"
 
 
 # ── Database setup ─────────────────────────────────────────────────────────────
@@ -148,10 +150,63 @@ def insert_articles(conn: sqlite3.Connection, articles: list[dict]) -> int:
     return new_count
 
 
+# ── Seed loader ────────────────────────────────────────────────────────────────
+
+def load_seed_if_empty() -> None:
+    """
+    If the articles table is empty, populate it from data/articles_seed.json.
+    Called at the top of main() so a fresh clone shows data immediately.
+    Skipped entirely if the DB already has rows.
+    """
+    conn = init_db(DB_PATH)
+    count = conn.execute("SELECT COUNT(*) FROM articles").fetchone()[0]
+
+    if count > 0:
+        print("Database already populated — skipping seed load.")
+        conn.close()
+        return
+
+    if not SEED_PATH.exists():
+        print("[WARN] Seed file not found and database is empty — starting with no data.")
+        conn.close()
+        return
+
+    with open(SEED_PATH, "r", encoding="utf-8") as f:
+        seed = json.load(f)
+
+    articles = seed.get("articles", [])
+    inserted = 0
+    for article in articles:
+        try:
+            conn.execute(
+                """
+                INSERT OR IGNORE INTO articles
+                    (id, title, summary, url, published_date, source_name,
+                     source_category, relevance_score, is_relevant, relevance_reason,
+                     category, classification_reason, ingested_at)
+                VALUES
+                    (:id, :title, :summary, :url, :published_date, :source_name,
+                     :source_category, :relevance_score, :is_relevant, :relevance_reason,
+                     :category, :classification_reason, :ingested_at)
+                """,
+                article,
+            )
+            inserted += 1
+        except Exception:
+            pass
+
+    conn.commit()
+    conn.close()
+    print(f"Seeded database with {inserted} articles from articles_seed.json")
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
     print("=== AI News Pipeline — Ingestion ===\n")
+
+    # Seed from JSON if the database is empty (first-time clone support)
+    load_seed_if_empty()
 
     today  = date.today()
     cutoff = today - timedelta(days=7)

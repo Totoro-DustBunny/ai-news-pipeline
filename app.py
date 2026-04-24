@@ -12,6 +12,7 @@ ROOT_DIR   = Path(__file__).resolve().parent
 DB_PATH    = ROOT_DIR / "storage" / "articles.db"
 KOL_PATH   = ROOT_DIR / "data" / "kol_posts.json"
 LI_PATH    = ROOT_DIR / "data" / "linkedin_posts.json"
+SEED_PATH  = ROOT_DIR / "data" / "articles_seed.json"
 
 
 # ── DB helper ──────────────────────────────────────────────────────────────────
@@ -21,6 +22,79 @@ def get_db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
+
+# ── Seed loader ────────────────────────────────────────────────────────────────
+
+def load_seed_if_empty() -> None:
+    """
+    Populate the database from data/articles_seed.json if it is currently empty.
+    Called once at app startup so `python app.py` works immediately after cloning.
+    """
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+
+    # Create the table if it doesn't exist yet
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS articles (
+            id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+            title                 TEXT,
+            summary               TEXT,
+            url                   TEXT UNIQUE,
+            published_date        TEXT,
+            source_name           TEXT,
+            source_category       TEXT,
+            relevance_score       INTEGER,
+            is_relevant           BOOLEAN,
+            relevance_reason      TEXT,
+            category              TEXT,
+            classification_reason TEXT,
+            ingested_at           TEXT
+        )
+    """)
+    conn.commit()
+
+    count = conn.execute("SELECT COUNT(*) FROM articles").fetchone()[0]
+    if count > 0:
+        conn.close()
+        return   # already populated — nothing to do
+
+    if not SEED_PATH.exists():
+        conn.close()
+        return   # no seed file — start empty
+
+    with open(SEED_PATH, "r", encoding="utf-8") as f:
+        seed = json.load(f)
+
+    articles = seed.get("articles", [])
+    inserted = 0
+    for article in articles:
+        try:
+            conn.execute(
+                """
+                INSERT OR IGNORE INTO articles
+                    (id, title, summary, url, published_date, source_name,
+                     source_category, relevance_score, is_relevant, relevance_reason,
+                     category, classification_reason, ingested_at)
+                VALUES
+                    (:id, :title, :summary, :url, :published_date, :source_name,
+                     :source_category, :relevance_score, :is_relevant, :relevance_reason,
+                     :category, :classification_reason, :ingested_at)
+                """,
+                article,
+            )
+            inserted += 1
+        except Exception:
+            pass
+
+    conn.commit()
+    conn.close()
+    print(f"[Seed] Loaded {inserted} articles from articles_seed.json into empty database.")
+
+
+# Seed on startup — runs once when the module is imported / server starts
+load_seed_if_empty()
 
 
 # ── Routes ─────────────────────────────────────────────────────────────────────
@@ -106,6 +180,33 @@ def api_stats():
         "categories":   [dict(r) for r in cat_rows],
         "sources":      [dict(r) for r in src_rows],
         "score_dist":   [dict(r) for r in score_rows],
+    })
+
+
+@app.route("/api/seed-status")
+def api_seed_status():
+    """Return data source metadata so the frontend can show a seeded vs live banner."""
+    conn = get_db()
+    db_count = conn.execute("SELECT COUNT(*) FROM articles").fetchone()[0]
+    relevant_count = conn.execute(
+        "SELECT COUNT(*) FROM articles WHERE relevance_score >= 8"
+    ).fetchone()[0]
+    last_run = conn.execute("SELECT MAX(ingested_at) FROM articles").fetchone()[0]
+    conn.close()
+
+    seed_exists = SEED_PATH.exists()
+    seed_count  = 0
+    if seed_exists:
+        with open(SEED_PATH, "r", encoding="utf-8") as f:
+            seed = json.load(f)
+        seed_count = seed.get("article_count", len(seed.get("articles", [])))
+
+    return jsonify({
+        "database_article_count": db_count,
+        "relevant_article_count": relevant_count,
+        "seed_file_exists":       seed_exists,
+        "seed_article_count":     seed_count,
+        "pipeline_last_run":      last_run,
     })
 
 

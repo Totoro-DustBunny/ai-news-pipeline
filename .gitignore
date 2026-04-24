@@ -23,9 +23,15 @@ env/
 *.swp
 *.swo
 
-# Storage
+# Storage — DB is regenerated from seed; never commit the binary
 storage/*.db
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Explicitly keep seed + generated content (do NOT add these to gitignore)
+# data/articles_seed.json
+# data/kol_posts.json
+# data/linkedin_posts.json
+# static/images/linkedin/
