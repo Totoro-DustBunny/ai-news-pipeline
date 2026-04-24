@@ -1804,6 +1804,7 @@ a:hover {
 .li-post-image {
   display: block;
   width: 100%;
+  max-width: 640px;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
@@ -1811,14 +1812,54 @@ a:hover {
 .li-image-caption {
   font-size: 11px;
   color: var(--color-text-light);
-  text-align: right;
-  margin: 4px 0 12px;
-  padding-right: 2px;
+  text-align: center;
+  margin: 6px 0 10px;
+}
+
+/* Collapsible brief toggle (shown below image) */
+.li-brief-toggle {
+  background: none;
+  border: none;
+  color: var(--color-blue);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 2px 0 8px;
+  display: block;
+}
+.li-brief-toggle:hover { text-decoration: underline; }
+.li-brief-collapsible {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+.li-brief-collapsible.open { max-height: 200px; }
+.li-brief-text {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+/* Fallback brief box (when image_path is null) */
+.li-image-brief-fallback {
+  border: 1.5px dashed #C8C8D4;
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  margin: 14px 0;
+  background: #FAFBFD;
+}
+.li-image-brief-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin: 0 0 6px;
 }
 .li-image-brief-note {
   font-size: 11px;
   color: #7A5200;
-  margin-top: 8px;
+  margin: 8px 0 0;
   padding-top: 8px;
   border-top: 1px dashed #E0C070;
 }

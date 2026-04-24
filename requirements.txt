@@ -7,6 +7,5 @@ schedule
 pyyaml
 flask
 duckduckgo-search
-google-genai
 Pillow
 # sqlite3 is built-in to Python — no install needed

@@ -67,12 +67,18 @@
           ${imagePath
             ? `<div class="li-post-image-wrap">
                  <img class="li-post-image" src="${imagePath}" alt="AI-generated visual for ${category}" loading="lazy">
-                 <p class="li-image-caption">&#10024; AI-generated image · Gemini</p>
+                 <p class="li-image-caption">Generated with DALL-E 3 (OpenAI) &middot; For illustrative purposes</p>
+               </div>
+               <button class="li-brief-toggle" data-brief-idx="${idx}" aria-expanded="false">
+                 View Image Brief &#9660;
+               </button>
+               <div class="li-brief-collapsible" id="li-brief-${idx}">
+                 <p class="li-brief-text">${imageBrief || '(No image brief)'}</p>
                </div>`
-            : `<p class="li-image-brief-label">&#128444;&#65039; Image / Visual Brief</p>
-               <div class="li-image-brief-box">
-                 ${imageBrief || '(No image brief provided)'}
-                 <p class="li-image-brief-note">&#9888;&#65039; Image not generated — run <code>python scripts/generate_linkedin.py</code> with <code>GOOGLE_AI_STUDIO_KEY</code> set.</p>
+            : `<div class="li-image-brief-box li-image-brief-fallback">
+                 <p class="li-image-brief-label">&#128444;&#65039; Image Brief (generation unavailable):</p>
+                 <p class="li-brief-text">${imageBrief || '(No image brief provided)'}</p>
+                 <p class="li-image-brief-note">&#9888;&#65039; Image generation was skipped or failed — set <code>OPENAI_API_KEY</code> and re-run <code>python scripts/generate_linkedin.py</code>.</p>
                </div>`
           }
 
@@ -96,6 +102,20 @@
   // ── Wire interactive behaviours ───────────────────────────────────────────
 
   function wireCards(posts) {
+    // Image brief collapsible toggle
+    document.querySelectorAll('.li-brief-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx     = btn.dataset.briefIdx;
+        const panel   = document.getElementById(`li-brief-${idx}`);
+        const isOpen  = panel.classList.contains('open');
+        panel.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', !isOpen);
+        btn.innerHTML = isOpen
+          ? `View Image Brief &#9660;`
+          : `Hide Image Brief &#9650;`;
+      });
+    });
+
     // Source toggle
     document.querySelectorAll('.li-sources-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
