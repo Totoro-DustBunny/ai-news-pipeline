@@ -29,6 +29,9 @@ env/
 *.sqlite
 *.sqlite3
 
+# Binary assets that don't belong in a code repo
+*.pdf
+
 # OS
 .DS_Store
 Thumbs.db
