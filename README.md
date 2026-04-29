@@ -71,7 +71,7 @@ A status banner on Tab 1 (Pipeline & Sources) will confirm whether you are viewi
 
 **Step 1 — Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-news-pipeline.git
+git clone https://github.com/Totoro-DustBunny/ai-news-pipeline.git
 cd ai-news-pipeline
 ```
 
